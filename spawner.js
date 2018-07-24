@@ -1,59 +1,27 @@
-let utilities = require('utilities');
 let harvesterSpawn = require('harvesterSpawn');
+let builderSpawn = require('builderSpawn');
+let repairerSpawn = require('repairerSpawn');
+let upgraderSpawn = require('upgraderSpawn');
 
 var spawner = {
-
     run: function() {
-        let upgraderCount = utilities.creepCount('upgrader');
-        let builderCount = utilities.creepCount('builder');
-        let repairerCount = utilities.creepCount('repairer');
-
         for(let name in Game.rooms) {
             let room = Game.rooms[name];
 
             let hSpawn = new harvesterSpawn(room);
-            if(hSpawn.canSpawn()) {
-                hSpawn.spawn();
-            }
-        }
+            let rSpawn = new repairerSpawn(room);
+            let uSpawn = new upgraderSpawn(room);
+            let bSpawn = new builderSpawn(room);
 
-        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && repairerCount < 1) {
-            Game.spawns['Robland'].spawnCreep(
-                [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
-                'Repairer' + Game.time.toString(),
-                {
-                    memory: {
-                        role: 'repairer',
-                        refuel: true
-                    }
-                }
-            );
-        }
-        
-        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && upgraderCount < 5) {
-            Game.spawns['Robland'].spawnCreep(
-                [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
-                'Upgrader' + Game.time.toString(),
-                {
-                    memory: {
-                        role: 'upgrader',
-                        refuel: true
-                    }
-                }
-            );
-        }
-        
-        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && builderCount < 1) {
-            Game.spawns['Robland'].spawnCreep(
-                [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
-                'Builder' + Game.time.toString(),
-                {
-                    memory: {
-                        role: 'builder',
-                        refuel: true
-                    }
-                }
-            );
+            if (hSpawn.canSpawn()) {
+                hSpawn.spawn();
+            } else if (rSpawn.canSpawn()) {
+                rSpawn.spawn();
+            } else if (uSpawn.canSpawn()) {
+                uSpawn.spawn();
+            } else if (bSpawn.canSpawn()) {
+                bSpawn.spawn();
+            }
         }
 	}
 };

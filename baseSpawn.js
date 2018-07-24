@@ -1,5 +1,3 @@
-let utilities = require('utilities');
-
 let baseSpawn = function(room) {
     this.room = room;
     this.creepBuild = [WORK, CARRY, MOVE];
@@ -7,7 +5,7 @@ let baseSpawn = function(room) {
 }
 
 baseSpawn.prototype.count = function(roleName, room) {
-    return utilities.creepCountRoom(roleName, room);
+    return Object.values(room.find(FIND_MY_CREEPS)).filter(a => a.memory.role == roleName).length;
 }
 
 baseSpawn.prototype.canSpawn = function() {
