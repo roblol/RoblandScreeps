@@ -43,7 +43,7 @@ var spawner = {
             );
         }
         
-        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && builderCount < 0) {
+        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && builderCount < 1) {
             Game.spawns['Robland'].spawnCreep(
                 [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
                 'Builder' + Game.time.toString(),
