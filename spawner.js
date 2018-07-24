@@ -1,5 +1,5 @@
 let utilities = require('utilities');
-let harvesterSpawn = require('havesterSpawn');
+let harvesterSpawn = require('harvesterSpawn');
 
 var spawner = {
 

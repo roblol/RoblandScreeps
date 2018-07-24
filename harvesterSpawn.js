@@ -6,10 +6,12 @@ let harvesterSpawn = function(room) {
     this.roleName = 'harvester';
 };
 
+harvesterSpawn.prototype = Object.create(baseSpawn.prototype);
+
 harvesterSpawn.prototype.spawn = function() {
     if(this.count(this.roleName) < 2) {
-        ParentClass.prototype.myMethod.call(this);
+        baseSpawn.prototype.spawn.call(this);
     }
 };
 
-harvesterSpawn.prototype = Object.create(baseSpawn.prototype);
+module.exports = harvesterSpawn;
