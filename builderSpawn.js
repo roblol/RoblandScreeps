@@ -8,7 +8,7 @@ let builderSpawn = function(room) {
 
 builderSpawn.prototype = Object.create(baseSpawn.prototype);
 
-harvesterSpawn.prototype.canSpawn = function() {
+builderSpawn.prototype.canSpawn = function() {
     return this.count(this.roleName, this.room) < 1 &&
         this.room.energyCapacityAvailable == this.room.energyAvailable;
 };
