@@ -10,6 +10,7 @@ builderSpawn.prototype = Object.create(baseSpawn.prototype);
 
 builderSpawn.prototype.canSpawn = function() {
     return this.count(this.roleName, this.room) < 1 &&
+        Object.values(this.room.find(FIND_CONSTRUCTION_SITES)).length > 0 &&
         this.room.energyCapacityAvailable == this.room.energyAvailable;
 };
 
