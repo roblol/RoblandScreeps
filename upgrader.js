@@ -1,25 +1,19 @@
-var roleUpgrader = {
+let baseRole = require('baseRole');
 
-    run: function(creep) {
-        if(creep.carry.energy == 0) {
-            creep.memory.refuel = true;
-        }
-        else if(creep.carry.energy == creep.carryCapacity) {
-            creep.memory.refuel = false;
-        }
-        
-        if(creep.memory.refuel) {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
-        }
-        else {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
-            }
-        }
-	}
+let upgraderRole = function(creep) {
+    baseRole.call(this, creep);
 };
 
-module.exports = roleUpgrader;
+upgraderRole.prototype = Object.create(baseRole.prototype);
+
+upgraderRole.prototype.getTarget = function(creep) {
+    return creep.room.controller;
+};
+
+upgraderRole.prototype.doWork = function(creep, target) {
+    if(creep.upgradeController(target) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(target);
+    }
+};
+
+module.exports = upgraderRole;
