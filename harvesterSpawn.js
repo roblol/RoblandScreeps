@@ -8,10 +8,9 @@ let harvesterSpawn = function(room) {
 
 harvesterSpawn.prototype = Object.create(baseSpawn.prototype);
 
-harvesterSpawn.prototype.spawn = function() {
-    if(this.count(this.roleName) < 2) {
-        baseSpawn.prototype.spawn.call(this);
-    }
+harvesterSpawn.prototype.canSpawn = function() {
+    return this.count(this.roleName, this.room) < 2 &&
+        this.room.energyCapacityAvailable == this.room.energyAvailable;
 };
 
 module.exports = harvesterSpawn;

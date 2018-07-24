@@ -6,8 +6,12 @@ let baseSpawn = function(room) {
     this.roleName = 'basic';
 }
 
-baseSpawn.prototype.count = function(roleName) {
-    return utilities.creepCount(roleName);
+baseSpawn.prototype.count = function(roleName, room) {
+    return utilities.creepCountRoom(roleName, room);
+}
+
+baseSpawn.prototype.canSpawn = function() {
+    throw 'must be overridden';
 }
 
 baseSpawn.prototype.spawn = function() {

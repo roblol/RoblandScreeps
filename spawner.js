@@ -11,8 +11,8 @@ var spawner = {
         for(let name in Game.rooms) {
             let room = Game.rooms[name];
 
-            if(room.energyCapacityAvailable == room.energyAvailable) {
-                let hSpawn = new harvesterSpawn(room);
+            let hSpawn = new harvesterSpawn(room);
+            if(hSpawn.canSpawn()) {
                 hSpawn.spawn();
             }
         }
