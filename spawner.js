@@ -1,26 +1,22 @@
 let utilities = require('utilities');
+let harvesterSpawn = require('havesterSpawn');
 
 var spawner = {
 
     run: function() {
-        let harvesterCount = utilities.creepCount('harvester');
         let upgraderCount = utilities.creepCount('upgrader');
         let builderCount = utilities.creepCount('builder');
         let repairerCount = utilities.creepCount('repairer');
-        
-        if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && harvesterCount < 2) {
-            Game.spawns['Robland'].spawnCreep(
-                [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
-                'Harvester' + Game.time.toString(),
-                {
-                    memory: {
-                        role: 'harvester',
-                        refuel: true
-                    }
-                }
-            );
+
+        for(let name in Game.rooms) {
+            let room = Game.rooms[name];
+
+            if(room.energyCapacityAvailable == room.energyAvailable) {
+                let hSpawn = new harvesterSpawn(room);
+                hSpawn.spawn();
+            }
         }
-        
+
         if(Game.spawns['Robland'].energy == Game.spawns['Robland'].energyCapacity && repairerCount < 1) {
             Game.spawns['Robland'].spawnCreep(
                 [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
