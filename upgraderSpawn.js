@@ -2,8 +2,8 @@ let baseSpawn = require('baseSpawn');
 
 let upgraderSpawn = function(room) {
     baseSpawn.call(this, room);
-    this.creepBuild = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
     this.roleName = 'upgrader';
+    this.creepBuild = this.getTier(this.roleName, this.room);
 };
 
 upgraderSpawn.prototype = Object.create(baseSpawn.prototype);

@@ -2,8 +2,8 @@ let baseSpawn = require('baseSpawn');
 
 let builderSpawn = function(room) {
     baseSpawn.call(this, room);
-    this.creepBuild = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
     this.roleName = 'builder';
+    this.creepBuild = this.getTier(this.roleName, this.room);
 };
 
 builderSpawn.prototype = Object.create(baseSpawn.prototype);

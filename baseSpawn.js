@@ -1,11 +1,20 @@
+let spawnConfig = require('spawnConfig');
+
 let baseSpawn = function(room) {
     this.room = room;
-    this.creepBuild = [WORK, CARRY, MOVE];
     this.roleName = 'basic';
+    this.creepBuild = this.getTier(this.roleName, this.room);
 }
 
 baseSpawn.prototype.count = function(roleName, room) {
     return Object.values(room.find(FIND_MY_CREEPS)).filter(a => a.memory.role == roleName).length;
+}
+
+baseSpawn.prototype.getTier = function(roleName, room) {
+    if(room.energyCapacityAvailable > 550) {
+        return spawnConfig.creeps[roleName].tiers[1];
+    }
+    return spawnConfig.creeps[roleName].tiers[0];
 }
 
 baseSpawn.prototype.canSpawn = function() {
