@@ -11,10 +11,13 @@ baseSpawn.prototype.count = function(roleName, room) {
 }
 
 baseSpawn.prototype.getTier = function(roleName, room) {
-    if(room.energyCapacityAvailable > spawnConfig.creeps[roleName][1].energy) {
-        return spawnConfig.creeps[roleName][1].config;
+    for(let name in spawnConfig.creeps[roleName]) {
+        let tierConfig = spawnConfig.creeps[roleName][name];
+
+        if(room.energyCapacityAvailable > tierConfig.energy) {
+            return tierConfig.config;
+        }
     }
-    return spawnConfig.creeps[roleName][0].config;
 }
 
 baseSpawn.prototype.canSpawn = function() {

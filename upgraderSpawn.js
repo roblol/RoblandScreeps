@@ -9,7 +9,7 @@ let upgraderSpawn = function(room) {
 upgraderSpawn.prototype = Object.create(baseSpawn.prototype);
 
 upgraderSpawn.prototype.canSpawn = function() {
-    return this.count(this.roleName, this.room) < 4 &&
+    return this.count(this.roleName, this.room) < 3 &&
         this.room.energyCapacityAvailable == this.room.energyAvailable;
 };
 
