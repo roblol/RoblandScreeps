@@ -3,6 +3,10 @@ let baseRole = function(creep){
 };
 
 baseRole.prototype.checkFuel = function(creep) {
+    if(creep.ticksToLive < 50) {
+        return false;
+    }
+
     if(creep.carry.energy == 0) {
         return true;
     }
